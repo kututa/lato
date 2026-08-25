@@ -1,0 +1,5 @@
+import type { Vehicle } from '../../types/vehicle';
+interface VehicleCardProps { vehicle: Vehicle; onViewDetails: (vehicle: Vehicle) => void; }
+export const VehicleCard = ({ vehicle, onViewDetails }: VehicleCardProps) => (
+  <article className="car-card"><div className="card-img-wrapper"><span className="badge">{vehicle.badge}</span><img src={vehicle.image} alt={vehicle.title} loading="lazy" /></div><div className="card-body"><h3 className="car-title">{vehicle.title}</h3><div className="car-price">{vehicle.priceFormatted}</div><div className="car-specs"><div className="spec-item"><i className="fa-solid fa-calendar" /> {vehicle.year}</div><div className="spec-item"><i className="fa-solid fa-gas-pump" /> {vehicle.fuel}</div><div className="spec-item"><i className="fa-solid fa-gears" /> {vehicle.transmission}</div><div className="spec-item"><i className="fa-solid fa-location-dot" /> {vehicle.location}</div></div><div className="card-action"><button className="btn-details" type="button" onClick={() => onViewDetails(vehicle)}>View Details</button></div></div></article>
+);

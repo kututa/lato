@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lota Motors | Digital Vehicle Showroom</title>
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* ==========================================================================
+       RESET & BASE STYLES
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    :root {
+      --primary: #2d1363;         /* Deep Lota Blue / Royal Navy */
+      --primary-dark: #1f0b45;    /* Darker shade for hovers */
+      --accent: #FFE600;          /* High-Vibrancy Vivid Yellow */
+      --accent-light: #FFF066;    /* Bright Soft Lemon Yellow */
+      --accent-hover: #E6CF00;    /* Vibrant Gold-Yellow for hovers */
+      --dark: #2d1363;           /* Primary blue tone for header/footer */
+      --dark-card: #220e4b;      /* Dark card backgrounds */
+      --light-bg: #f8f9fa;
+      --text-main: #2b2b2b;
+      --text-muted: #6c757d;
+      --border-color: #e0e0e0;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+      --shadow-lg: 0 10px 25px rgba(0,0,0,0.15);
+      --radius: 8px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--light-bg);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== */
+    header {
+      background-color: #ffffff;
+      color: #2b2b2b;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 1.5rem;
+    }
+
+    .brand-logo-img {
+      height: 75px; /* Increased height for prominent visibility */
+      width: auto;
+      object-fit: contain;
+      background: transparent;
+      padding: 2px 4px;
+      border-radius: 4px;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 1.8rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--primary); /* Deep Lota Blue */
+      transition: color 0.2s ease-in-out;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-hover);
+    }
+
+    .nav-contact-btn {
+      background-color: var(--primary) !important;
+      color: var(--accent) !important;
+      padding: 0.6rem 1.4rem;
+      border-radius: var(--radius);
+      font-weight: 700;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .nav-contact-btn:hover {
+      background-color: var(--primary-dark) !important;
+      color: #ffffff !important;
+      transform: translateY(-2px);
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: var(--primary);
+    }
+
+    /* ==========================================================================
+       HERO SECTION WITH AUTOMATIC IMAGE CAROUSEL & TRANSPARENT OVERLAY
+       ========================================================================== */
+    .hero {
+      position: relative;
+      padding: 6rem 1.5rem 7rem;
+      text-align: center;
+      overflow: hidden;
+      min-height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-slideshow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .hero-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out, transform 6s ease-out;
+      transform: scale(1.03);
+    }
+
+    .hero-slide.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(15, 10, 30, 0.6) 100%);
+      z-index: 2;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      max-width: 850px;
+      margin: 0 auto;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+      color: var(--accent);
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: #ffffff;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Dynamic Slide Indicators */
+    .slide-dots {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+      display: flex;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .dot.active {
+      background: var(--accent);
+      width: 28px;
+      border-radius: 10px;
+    }
+
+    /* ==========================================================================
+       CONTROLS & SEARCH BAR
+       ========================================================================== */
+    .filter-wrapper {
+      max-width: 1100px;
+      margin: -2.5rem auto 3rem;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .filter-card {
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      border-top: 4px solid var(--accent);
+    }
+
+    .search-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .search-input-group {
+      flex: 2;
+      min-width: 260px;
+      position: relative;
+    }
+
+    .search-input-group i {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--primary);
+    }
+
+    .search-input-group input {
+      width: 100%;
+      padding: 0.8rem 1rem 0.8rem 2.8rem;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .sort-group {
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .sort-group select {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      font-size: 1rem;
+      background: #fff;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .category-tabs {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 0.3rem;
+    }
+
+    .tab-btn {
+      padding: 0.5rem 1.2rem;
+      border: 1px solid var(--border-color);
+      background: #fff;
+      color: var(--text-main);
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active, .tab-btn:hover {
+      background: var(--primary);
+      color: var(--accent);
+      border-color: var(--primary);
+    }
+
+    /* ==========================================================================
+       SHOWROOM GRID & CARDS
+       ========================================================================== */
+    .showroom-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--primary);
+    }
+
+    .inventory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .car-card {
+      background: #fff;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-color);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .car-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .card-img-wrapper {
+      position: relative;
+      height: 220px;
+      overflow: hidden;
+    }
+
+    .card-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .car-card:hover .card-img-wrapper img {
+      transform: scale(1.05);
+    }
+
+    .badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .card-body {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .car-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: var(--primary);
+    }
+
+    .car-price {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 0.8rem;
+    }
+
+    .car-specs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      padding: 0.8rem 0;
+      border-top: 1px solid #f0f0f0;
+      border-bottom: 1px solid #f0f0f0;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .spec-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .card-action {
+      margin-top: auto;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn-details {
+      flex: 1;
+      padding: 0.7rem;
+      background: var(--primary);
+      color: var(--accent);
+      border: none;
+      border-radius: var(--radius);
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      transition: background 0.2s;
+    }
+
+    .btn-details:hover {
+      background: var(--primary-dark);
+    }
+
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 3rem 1rem;
+      background: #fff;
+      border-radius: var(--radius);
+      border: 1px dashed var(--border-color);
+      color: var(--text-muted);
+    }
+
+    .no-results i {
+      font-size: 2.5rem;
+      margin-bottom: 0.8rem;
+      color: var(--primary);
+    }
+
+    /* ==========================================================================
+       FINANCING CALCULATOR WIDGET
+       ========================================================================== */
+    .calculator-section {
+      background: var(--dark);
+      color: #fff;
+      padding: 4rem 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .calc-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .calc-info h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    .calc-info p {
+      color: #ddd;
+      margin-bottom: 1.5rem;
+    }
+
+    .calc-form {
+      background: var(--dark-card);
+      padding: 2rem;
+      border-radius: var(--radius);
+      border: 1px solid rgba(238, 251, 117, 0.3);
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 0.4rem;
+      color: #ccc;
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: var(--radius);
+      border: 1px solid #444;
+      background: #121212;
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    .calc-result {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #333;
+      text-align: center;
+    }
+
+    .calc-result span {
+      display: block;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    .calc-result h3 {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-top: 0.2rem;
+    }
+
+    /* ==========================================================================
+       BRANCH LOCATIONS & CONTACT
+       ========================================================================== */
+    .branches-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    .branches-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .branch-card {
+      background: #fff;
+      padding: 2rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      border-top: 4px solid var(--primary);
+    }
+
+    .branch-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .branch-details p {
+      margin-bottom: 0.8rem;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+    }
+
+    .branch-details i {
+      color: var(--primary);
+    }
+
+    /* ==========================================================================
+       MODAL POPUP
+       ========================================================================== */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: #fff;
+      max-width: 700px;
+      width: 100%;
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+      animation: modalFadeIn 0.25s ease;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 1.8rem;
+      color: #fff;
+      background: rgba(0,0,0,0.6);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .modal-img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    .modal-body {
+      padding: 1.8rem;
+    }
+
+    .modal-price {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin: 0.4rem 0 1rem;
+    }
+
+    .modal-specs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      background: var(--light-bg);
+      padding: 1.2rem;
+      border-radius: var(--radius);
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-spec-item span {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .modal-spec-item strong {
+      font-size: 0.95rem;
+      color: var(--dark);
+    }
+
+    .whatsapp-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      background: #25D366;
+      color: #fff;
+      padding: 0.9rem;
+      border-radius: var(--radius);
+      font-weight: 700;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+
+    .whatsapp-btn:hover {
+      background: #1eb956;
+    }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    footer {
+      background: var(--dark);
+      color: #aaa;
+      padding: 3rem 1.5rem 1.5rem;
+      border-top: 2px solid var(--accent);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-col h4 {
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 0.6rem;
+      font-size: 0.9rem;
+    }
+
+    .footer-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 2rem 0;
+    }
+
+    .footer-logo img {
+      height: 70px;
+      width: auto;
+      background: #fff;
+      padding: 6px 12px;
+      border-radius: 6px;
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.85rem;
+      color: var(--accent);
+    }
+
+    /* ==========================================================================
+       RESPONSIVE DESIGN
+       ========================================================================== */
+    @media (max-width: 768px) {
+      .brand-logo-img {
+        height: 55px; /* Slightly scaled for mobile viewports */
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #ffffff;
+        padding: 1.5rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .calc-container {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-specs-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="brand-logo">
+        <img src="https://i.postimg.cc/DZJx0tVy/LOTA-MOTORSPORTS.png" alt="Lota Motors Logo" class="brand-logo-img" onerror="this.src='https://via.placeholder.com/200x75?text=LOTA+MOTORS';">
+      </a>
+      <div class="menu-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#showroom">Showroom</a></li>
+        <li><a href="#financing">Financing</a></li>
+        <li><a href="#branches">Locations</a></li>
+        <li><a href="#contact" class="nav-contact-btn">Contact Sales</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Hero Banner with Dynamic Background Slideshow -->
+  <section class="hero">
+    <div class="hero-slideshow" id="heroSlideshow">
+      <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1600&q=80');"></div>
+      <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=80');"></div>
+      <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1600&q=80');"></div>
+      <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1559416523-140ddc3d238c?auto=format&fit=crop&w=1600&q=80');"></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Find Your Ideal Ride Today</h1>
+      <p>Explore Kenya's premier collection of certified new & imported vehicles in Mombasa and Nairobi.</p>
+    </div>
+    <div class="slide-dots" id="slideDots"></div>
+  </section>
+
+  <!-- Dynamic Search & Filter Controls -->
+  <div class="filter-wrapper">
+    <div class="filter-card">
+      <div class="search-row">
+        <div class="search-input-group">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="searchInput" placeholder="Search by make, model, or year (e.g. Prado, 2018)...">
+        </div>
+        <div class="sort-group">
+          <select id="sortSelect">
+            <option value="default">Sort By: Featured</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="year-desc">Year: Newest First</option>
+          </select>
+        </div>
+      </div>
+      <div class="category-tabs" id="categoryTabs">
+        <button class="tab-btn active" data-category="all">All Inventory</button>
+        <button class="tab-btn" data-category="SUV">SUVs</button>
+        <button class="tab-btn" data-category="Sedan">Sedans</button>
+        <button class="tab-btn" data-category="Truck">Pickups & Trucks</button>
+        <button class="tab-btn" data-category="Luxury">Luxury</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Showroom Section -->
+  <main class="showroom-container" id="showroom">
+    <div class="section-title">
+      <h2>Available Vehicles</h2>
+      <span id="resultsCount" style="font-size: 0.9rem; color: var(--text-muted); font-weight: normal;">Showing all cars</span>
+    </div>
+
+    <div class="inventory-grid" id="inventoryGrid">
+      <!-- Cards rendered via JavaScript -->
+    </div>
+  </main>
+
+  <!-- Auto Financing Calculator -->
+  <section class="calculator-section" id="financing">
+    <div class="calc-container">
+      <div class="calc-info">
+        <h2>Auto Loan Estimator</h2>
+        <p>Estimate your monthly repayments based on current bank financing plans in Kenya. Choose your budget terms below.</p>
+      </div>
+      <div class="calc-form">
+        <div class="form-group">
+          <label for="calcPrice">Vehicle Price (KSh)</label>
+          <input type="number" id="calcPrice" value="4500000" step="100000">
+        </div>
+        <div class="form-group">
+          <label for="calcDeposit">Deposit / Down Payment (KSh)</label>
+          <input type="number" id="calcDeposit" value="1000000" step="50000">
+        </div>
+        <div class="form-group">
+          <label for="calcTerm">Loan Duration</label>
+          <select id="calcTerm">
+            <option value="12">12 Months (1 Year)</option>
+            <option value="24">24 Months (2 Years)</option>
+            <option value="36" selected>36 Months (3 Years)</option>
+            <option value="48">48 Months (4 Years)</option>
+            <option value="60">60 Months (5 Years)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="calcInterest">Estimated Interest Rate (% p.a.)</label>
+          <input type="number" id="calcInterest" value="14" step="0.5">
+        </div>
+        <div class="calc-result">
+          <span>Estimated Monthly Payment</span>
+          <h3 id="monthlyPaymentResult">KSh 119,650 / mo</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Branch Locations -->
+  <section class="branches-container" id="branches">
+    <div class="section-title">
+      <h2>Showroom Locations</h2>
+    </div>
+    <div class="branches-grid">
+      <div class="branch-card">
+        <h3><i class="fa-solid fa-location-dot"></i> Mombasa Branch</h3>
+        <div class="branch-details">
+          <p><i class="fa-solid fa-map-pin"></i> Tom Mboya Avenue, Makupa Roundabout</p>
+          <p><i class="fa-solid fa-phone"></i> +254 713 000 000 / +254 720 635 555</p>
+          <p><i class="fa-solid fa-envelope"></i> lotacarsaleslimited@gmail.com</p>
+          <p><i class="fa-solid fa-clock"></i> Mon - Sat: 8:00 AM - 6:00 PM</p>
+        </div>
+      </div>
+      <div class="branch-card">
+        <h3><i class="fa-solid fa-location-dot"></i> Nairobi Branch</h3>
+        <div class="branch-details">
+          <p><i class="fa-solid fa-map-pin"></i> Junction 4th Parklands / Masari Rd (Opposite Diamond Plaza)</p>
+          <p><i class="fa-solid fa-phone"></i> +254 714 555 000 / +254 727 555 555</p>
+          <p><i class="fa-solid fa-envelope"></i> lota.nairobi@gmail.com</p>
+          <p><i class="fa-solid fa-clock"></i> Mon - Sat: 8:00 AM - 6:00 PM</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vehicle Detail Modal -->
+  <div class="modal" id="carModal">
+    <div class="modal-content">
+      <span class="close-modal" id="closeModal">&times;</span>
+      <img id="modalImg" class="modal-img" src="" alt="Vehicle Image">
+      <div class="modal-body">
+        <h2 id="modalTitle">Vehicle Details</h2>
+        <div id="modalPrice" class="modal-price">KSh 0</div>
+        
+        <div class="modal-specs-grid">
+          <div class="modal-spec-item">
+            <span>Body Style</span>
+            <strong id="modalCategory">-</strong>
+          </div>
+          <div class="modal-spec-item">
+            <span>Year Model</span>
+            <strong id="modalYear">-</strong>
+          </div>
+          <div class="modal-spec-item">
+            <span>Engine Capacity</span>
+            <strong id="modalEngine">-</strong>
+          </div>
+          <div class="modal-spec-item">
+            <span>Fuel Type</span>
+            <strong id="modalFuel">-</strong>
+          </div>
+          <div class="modal-spec-item">
+            <span>Transmission</span>
+            <strong id="modalTransmission">-</strong>
+          </div>
+          <div class="modal-spec-item">
+            <span>Location</span>
+            <strong id="modalLocation">-</strong>
+          </div>
+        </div>
+
+        <a id="whatsappLink" href="#" target="_blank" class="whatsapp-btn">
+          <i class="fa-brands fa-whatsapp"></i> Inquire via WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <div class="footer-container">
+      <div class="footer-col">
+        <h4>Lota Motors</h4>
+        <p style="font-size: 0.85rem; color: #aaa;">Kenya's trusted dealership for high-grade Japanese and European imported vehicles since establishment.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#showroom">Showroom Inventory</a></li>
+          <li><a href="#financing">Finance Calculator</a></li>
+          <li><a href="#branches">Our Showrooms</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Popular Brands</h4>
+        <ul>
+          <li>Toyota & Lexus</li>
+          <li>Mercedes-Benz</li>
+          <li>Subaru</li>
+          <li>Mazda</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Official Logo Placement in Footer -->
+    <div class="footer-logo">
+      <img 
+        src="https://i.postimg.cc/DZJx0tVy/LOTA-MOTORSPORTS.png" 
+        alt="Lota Car Sales Ltd Logo" 
+        style="max-width: 220px; height: auto; display: block; margin: 0 auto; background: transparent;" 
+        onerror="this.src='https://via.placeholder.com/200x60?text=LOTA+CAR+SALES+LTD';"
+      >
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Lota Car Sales Ltd. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+      APPLICATION LOGIC (JAVASCRIPT)
+      ========================================================================== -->
+  <script>
+    // Sample Vehicle Data
+    const carsData = [
+      {
+        id: 1,
+        title: "Toyota Land Cruiser Prado TX-L",
+        category: "SUV",
+        year: 2018,
+        priceRaw: 5800000,
+        priceFormatted: "KSh 5,800,000",
+        engine: "2.8L Turbo Diesel",
+        fuel: "Diesel",
+        transmission: "Automatic",
+        location: "Mombasa",
+        badge: "Verified",
+        image: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: 2,
+        title: "Mercedes-Benz C200 AMG Line",
+        category: "Luxury",
+        year: 2017,
+        priceRaw: 3450000,
+        priceFormatted: "KSh 3,450,000",
+        engine: "2.0L Turbo",
+        fuel: "Petrol",
+        transmission: "Automatic",
+        location: "Nairobi",
+        badge: "Popular",
+        image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: 3,
+        title: "Toyota Hilux Double Cab V6",
+        category: "Truck",
+        year: 2020,
+        priceRaw: 4600000,
+        priceFormatted: "KSh 4,600,000",
+        engine: "2.4L Diesel",
+        fuel: "Diesel",
+        transmission: "Automatic",
+        location: "Mombasa",
+        badge: "Heavy Duty",
+        image: "https://images.unsplash.com/photo-1559416523-140ddc3d238c?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: 4,
+        title: "Mazda CX-5 SkyActiv-D",
+        category: "SUV",
+        year: 2016,
+        priceRaw: 2250000,
+        priceFormatted: "KSh 2,250,000",
+        engine: "2.2L Diesel",
+        fuel: "Diesel",
+        transmission: "Automatic",
+        location: "Mombasa",
+        badge: "Great Value",
+        image: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: 5,
+        title: "Subaru Outback 2.5i Eyesight",
+        category: "SUV",
+        year: 2017,
+        priceRaw: 2750000,
+        priceFormatted: "KSh 2,750,000",
+        engine: "2.5L Boxer",
+        fuel: "Petrol",
+        transmission: "CVT",
+        location: "Nairobi",
+        badge: "AWD",
+        image: "https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: 6,
+        title: "Toyota Mark X 250G",
+        category: "Sedan",
+        year: 2015,
+        priceRaw: 1850000,
+        priceFormatted: "KSh 1,850,000",
+        engine: "2.5L V6",
+        fuel: "Petrol",
+        transmission: "Automatic",
+        location: "Mombasa",
+        badge: "Fresh Import",
+        image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80"
+      }
+    ];
+
+    // State Variables
+    let activeCategory = "all";
+    let searchQuery = "";
+    let sortBy = "default";
+
+    // DOM Elements
+    const inventoryGrid = document.getElementById("inventoryGrid");
+    const searchInput = document.getElementById("searchInput");
+    const sortSelect = document.getElementById("sortSelect");
+    const categoryTabs = document.getElementById("categoryTabs");
+    const resultsCount = document.getElementById("resultsCount");
+    
+    // Modal Elements
+    const carModal = document.getElementById("carModal");
+    const closeModalBtn = document.getElementById("closeModal");
+
+    // Dynamic Hero Slideshow Logic
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.hero-slide');
+    const dotsContainer = document.getElementById('slideDots');
+
+    function initSlideshow() {
+      slides.forEach((_, idx) => {
+        const dot = document.createElement('div');
+        dot.className = `dot ${idx === 0 ? 'active' : ''}`;
+        dot.addEventListener('click', () => goToSlide(idx));
+        dotsContainer.appendChild(dot);
+      });
+
+      setInterval(nextSlide, 5000); // Transitions every 5 seconds
+    }
+
+    function goToSlide(index) {
+      slides[currentSlide].classList.remove('active');
+      dotsContainer.children[currentSlide].classList.remove('active');
+      
+      currentSlide = index;
+      
+      slides[currentSlide].classList.add('active');
+      dotsContainer.children[currentSlide].classList.add('active');
+    }
+
+    function nextSlide() {
+      let next = (currentSlide + 1) % slides.length;
+      goToSlide(next);
+    }
+
+    // Initialize App
+    document.addEventListener("DOMContentLoaded", () => {
+      initSlideshow();
+      renderShowroom();
+      setupEventListeners();
+      calculateLoan();
+    });
+
+    // Render Cars
+    function renderShowroom() {
+      let filtered = carsData.filter(car => {
+        const matchesCategory = activeCategory === "all" || car.category.toLowerCase() === activeCategory.toLowerCase();
+        const matchesSearch = car.title.toLowerCase().includes(searchQuery) || car.year.toString().includes(searchQuery);
+        return matchesCategory && matchesSearch;
+      });
+
+      // Sorting Logic
+      if (sortBy === "price-low") {
+        filtered.sort((a, b) => a.priceRaw - b.priceRaw);
+      } else if (sortBy === "price-high") {
+        filtered.sort((a, b) => b.priceRaw - a.priceRaw);
+      } else if (sortBy === "year-desc") {
+        filtered.sort((a, b) => b.year - a.year);
+      }
+
+      // Update Result Count Label
+      resultsCount.textContent = `Showing ${filtered.length} vehicle${filtered.length === 1 ? '' : 's'}`;
+
+      // Render Cards
+      if (filtered.length === 0) {
+        inventoryGrid.innerHTML = `
+          <div class="no-results">
+            <i class="fa-solid fa-car-side"></i>
+            <h3>No vehicles found</h3>
+            <p>Try adjusting your search criteria or category filter.</p>
+          </div>
+        `;
+        return;
+      }
+
+      inventoryGrid.innerHTML = filtered.map(car => `
+        <div class="car-card">
+          <div class="card-img-wrapper">
+            <span class="badge">${car.badge}</span>
+            <img src="${car.image}" alt="${car.title}" loading="lazy">
+          </div>
+          <div class="card-body">
+            <h3 class="car-title">${car.title}</h3>
+            <div class="car-price">${car.priceFormatted}</div>
+            <div class="car-specs">
+              <div class="spec-item"><i class="fa-solid fa-calendar"></i> ${car.year}</div>
+              <div class="spec-item"><i class="fa-solid fa-gas-pump"></i> ${car.fuel}</div>
+              <div class="spec-item"><i class="fa-solid fa-gears"></i> ${car.transmission}</div>
+              <div class="spec-item"><i class="fa-solid fa-location-dot"></i> ${car.location}</div>
+            </div>
+            <div class="card-action">
+              <button class="btn-details" onclick="openCarModal(${car.id})">View Details</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Modal Interaction
+    window.openCarModal = function(id) {
+      const car = carsData.find(item => item.id === id);
+      if (!car) return;
+
+      document.getElementById("modalImg").src = car.image;
+      document.getElementById("modalTitle").textContent = car.title;
+      document.getElementById("modalPrice").textContent = car.priceFormatted;
+      document.getElementById("modalCategory").textContent = car.category;
+      document.getElementById("modalYear").textContent = car.year;
+      document.getElementById("modalEngine").textContent = car.engine;
+      document.getElementById("modalFuel").textContent = car.fuel;
+      document.getElementById("modalTransmission").textContent = car.transmission;
+      document.getElementById("modalLocation").textContent = car.location;
+
+      const waMsg = encodeURIComponent(`Hello Lota Motors, I am interested in the ${car.year} ${car.title} listed for ${car.priceFormatted}. Is it available?`);
+      document.getElementById("whatsappLink").href = `https://wa.me/254713000000?text=${waMsg}`;
+
+      carModal.classList.add("active");
+    };
+
+    function closeModal() {
+      carModal.classList.remove("active");
+    }
+
+    // Auto Financing Logic
+    function calculateLoan() {
+      const price = parseFloat(document.getElementById("calcPrice").value) || 0;
+      const deposit = parseFloat(document.getElementById("calcDeposit").value) || 0;
+      const months = parseInt(document.getElementById("calcTerm").value) || 36;
+      const annualRate = parseFloat(document.getElementById("calcInterest").value) || 14;
+
+      const principal = price - deposit;
+      if (principal <= 0) {
+        document.getElementById("monthlyPaymentResult").textContent = "KSh 0 / mo";
+        return;
+      }
+
+      const monthlyRate = (annualRate / 100) / 12;
+      const payment = (principal * monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+
+      document.getElementById("monthlyPaymentResult").textContent = `KSh ${Math.round(payment).toLocaleString()} / mo`;
+    }
+
+    // Event Listeners
+    function setupEventListeners() {
+      // Mobile Navigation
+      document.getElementById("menuToggle").addEventListener("click", () => {
+        document.getElementById("navLinks").classList.toggle("show");
+      });
+
+      // Filter & Search Controls
+      searchInput.addEventListener("input", (e) => {
+        searchQuery = e.target.value.toLowerCase().trim();
+        renderShowroom();
+      });
+
+      sortSelect.addEventListener("change", (e) => {
+        sortBy = e.target.value;
+        renderShowroom();
+      });
+
+      categoryTabs.addEventListener("click", (e) => {
+        if (e.target.classList.contains("tab-btn")) {
+          document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+          e.target.classList.add("active");
+          activeCategory = e.target.getAttribute("data-category");
+          renderShowroom();
+        }
+      });
+
+      // Financing Calculator Inputs
+      ["calcPrice", "calcDeposit", "calcTerm", "calcInterest"].forEach(id => {
+        document.getElementById(id).addEventListener("input", calculateLoan);
+      });
+
+      // Close Modal Events
+      closeModalBtn.addEventListener("click", closeModal);
+      window.addEventListener("click", (e) => {
+        if (e.target === carModal) closeModal();
+      });
+    }
+  </script>
+</body>
+</html>

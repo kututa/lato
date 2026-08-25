@@ -1,0 +1,14 @@
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import './styles/variables.css';
+import './styles/globals.css';
+import './styles/header.css';
+import './styles/hero.css';
+import './styles/showroom.css';
+import './styles/financing.css';
+import './styles/branches.css';
+import './styles/modal.css';
+import './styles/footer.css';
+import App from './App';
+createRoot(document.getElementById('root')!).render(<React.StrictMode><App /></React.StrictMode>);

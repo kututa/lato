@@ -1,0 +1,2 @@
+import type { Branch } from '../../types/branch';
+export const BranchCard = ({ branch }: { branch: Branch }) => (<article className="branch-card"><h3><i className="fa-solid fa-location-dot" /> {branch.name}</h3><div className="branch-details"><p><i className="fa-solid fa-map-pin" /> {branch.address}</p><p><i className="fa-solid fa-phone" /> {branch.phone}</p><p><i className="fa-solid fa-envelope" /> {branch.email}</p><p><i className="fa-solid fa-clock" /> {branch.hours}</p></div></article>);

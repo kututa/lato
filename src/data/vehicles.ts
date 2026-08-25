@@ -1,0 +1,10 @@
+import type { Vehicle } from '../types/vehicle';
+
+export const vehicles: Vehicle[] = [
+  { id: 1, title: 'Toyota Land Cruiser Prado TX-L', category: 'SUV', year: 2018, priceRaw: 5800000, priceFormatted: 'KSh 5,800,000', engine: '2.8L Turbo Diesel', fuel: 'Diesel', transmission: 'Automatic', location: 'Mombasa', badge: 'Verified', image: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80' },
+  { id: 2, title: 'Mercedes-Benz C200 AMG Line', category: 'Luxury', year: 2017, priceRaw: 3450000, priceFormatted: 'KSh 3,450,000', engine: '2.0L Turbo', fuel: 'Petrol', transmission: 'Automatic', location: 'Nairobi', badge: 'Popular', image: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80' },
+  { id: 3, title: 'Toyota Hilux Double Cab V6', category: 'Truck', year: 2020, priceRaw: 4600000, priceFormatted: 'KSh 4,600,000', engine: '2.4L Diesel', fuel: 'Diesel', transmission: 'Automatic', location: 'Mombasa', badge: 'Heavy Duty', image: 'https://images.unsplash.com/photo-1559416523-140ddc3d238c?auto=format&fit=crop&w=800&q=80' },
+  { id: 4, title: 'Mazda CX-5 SkyActiv-D', category: 'SUV', year: 2016, priceRaw: 2250000, priceFormatted: 'KSh 2,250,000', engine: '2.2L Diesel', fuel: 'Diesel', transmission: 'Automatic', location: 'Mombasa', badge: 'Great Value', image: 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&q=80' },
+  { id: 5, title: 'Subaru Outback 2.5i Eyesight', category: 'SUV', year: 2017, priceRaw: 2750000, priceFormatted: 'KSh 2,750,000', engine: '2.5L Boxer', fuel: 'Petrol', transmission: 'CVT', location: 'Nairobi', badge: 'AWD', image: 'https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80' },
+  { id: 6, title: 'Toyota Mark X 250G', category: 'Sedan', year: 2015, priceRaw: 1850000, priceFormatted: 'KSh 1,850,000', engine: '2.5L V6', fuel: 'Petrol', transmission: 'Automatic', location: 'Mombasa', badge: 'Fresh Import', image: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80' },
+];
